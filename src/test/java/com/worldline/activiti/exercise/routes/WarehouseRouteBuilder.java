@@ -1,0 +1,27 @@
+package com.worldline.activiti.exercise.routes;
+
+import java.util.Map.Entry;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.apache.camel.builder.RouteBuilder;
+
+public class WarehouseRouteBuilder extends RouteBuilder {
+
+	@Override
+	public void configure() throws Exception {
+		errorHandler(deadLetterChannel("seda:errors"));
+		from("activiti:activiti2Camel:sendListOfProducts?copyVariablesFromProperties=true").process(logProcessor);
+	}
+
+	Processor logProcessor = new Processor() {
+		@Override
+		public void process(Exchange exchange) throws Exception {
+			System.out.println("camel properties");
+			for (Entry<String, Object> entry : exchange.getProperties().entrySet()) {
+				System.out.println(entry.getKey() + " => " + entry.getValue());
+			}
+			exchange.getProperties().put("varB", "a value from camel");
+		}
+	};
+}
