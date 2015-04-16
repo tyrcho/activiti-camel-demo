@@ -1,0 +1,15 @@
+target
+*.class
+*.jar
+*.war
+*.ear
+bin/*
+.classpath
+.project
+.settings/
+.bpmn/*
+*/.metadata
+
+*~
+*.sw?
+*.orig
