@@ -12,6 +12,7 @@ public class WarehouseRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 		errorHandler(deadLetterChannel("seda:errors"));
 		from("activiti:activiti2Camel:sendListOfProducts?copyVariablesFromProperties=true").process(logProcessor);
+		from("direct:start").to("activiti:camel2Activiti").process(logProcessor);
 	}
 
 	Processor logProcessor = new Processor() {
