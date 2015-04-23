@@ -11,7 +11,7 @@ public class WarehouseRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from("activiti:activiti2Camel:sendListOfProducts?copyVariablesFromProperties=true").process(logProcessor);
-		from("direct:start").to("activiti:camel2Activiti?copyVariablesToBodyAsMap").process(logProcessor);
+		from("direct:start").to("activiti:camel2Activiti?var.return.exampleCamelReturnValue&var.return.vara").process(logProcessor);
 	}
 
 	Processor logProcessor = new Processor() {

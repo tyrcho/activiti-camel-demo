@@ -13,7 +13,7 @@ public class LogVariables implements JavaDelegate {
 		for (Entry<String, Object> entry : execution.getVariables().entrySet()) {
 			System.out.println(entry.getKey() + " => " + entry.getValue());
 		}
-		execution.setVariable("varB", "set from activiti");
+		execution.setVariable("exampleCamelReturnValue", "set from activiti");
 	}
 
 }
